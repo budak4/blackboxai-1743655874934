@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - Amir Begedil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        function submitOrder() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const items = Array.from(document.getElementById('items').selectedOptions)
+                              .map(option => option.value);
+            const notes = document.getElementById('notes').value;
+
+            if (!name || !phone || !address || items.length === 0) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const message = `*NEW ORDER - AMIR BEGEDIL*\n\n` +
+                          `*Name:* ${name}\n` +
+                          `*Phone:* ${phone}\n` +
+                          `*Address:* ${address}\n\n` +
+                          `*Items Ordered:*\n${items.join('\n')}\n\n` +
+                          `*Special Notes:* ${notes || 'None'}`;
+
+            window.open(`https://wa.me/60104624558?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-orange-500 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Amir Popia Begedil</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-orange-200">Home</a></li>
+                    <li><a href="catalog.html" class="hover:text-orange-200">Menu</a></li>
+                    <li><a href="order.html" class="hover:text-orange-200 font-bold">Order Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Order Form Section -->
+    <section class="py-12 container mx-auto px-4">
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-3xl font-bold text-center mb-8">Place Your Order</h2>
+            
+            <form onsubmit="submitOrder(); return false;">
+                <!-- Customer Info -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-4 text-orange-500">Customer Information</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-gray-700 mb-1">Phone Number *</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required>
+                        </div>
+                        <div>
+                            <label for="address" class="block text-gray-700 mb-1">Delivery Address *</label>
+                            <textarea id="address" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Items -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-semibold mb-4 text-orange-500">Select Items</h3>
+                    <label for="items" class="block text-gray-700 mb-2">Menu Items *</label>
+                    <select id="items" multiple class="w-full px-4 py-2 border rounded-lg h-auto min-h-[120px] focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required>
+                        <option value="Classic Popia Begedil - RM7.50">Classic Popia Begedil - RM7.50</option>
+                        <option value="Chicken Popia Begedil - RM8.50">Chicken Popia Begedil - RM8.50</option>
+                        <option value="Spicy Popia Begedil - RM8.00">Spicy Popia Begedil - RM8.00</option>
+                        <option value="Cheese Popia Begedil - RM9.00">Cheese Popia Begedil - RM9.00</option>
+                        <option value="Veggie Popia Begedil - RM7.00">Veggie Popia Begedil - RM7.00</option>
+                        <option value="Family Combo - RM30.00">Family Combo - RM30.00</option>
+                    </select>
+                    <p class="text-sm text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple items</p>
+                </div>
+
+                <!-- Special Instructions -->
+                <div class="mb-8">
+                    <label for="notes" class="block text-gray-700 mb-2">Special Instructions</label>
+                    <textarea id="notes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="Any allergies, special requests, etc."></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300">
+                        <i class="fab fa-whatsapp mr-2"></i> Send Order via WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2023 Amir Begedil. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="https://wa.me/60104624558" class="text-orange-400 hover:text-orange-300 mx-2">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
